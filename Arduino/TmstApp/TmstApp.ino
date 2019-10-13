@@ -24,7 +24,7 @@ const uint8_t AINPOT = A0;
 
 enum TmsType {
   Sweep = 0,
-  Set
+  Follow
 };
 
 class TmsState {
@@ -43,9 +43,9 @@ class TmsSweepState : public TmsState {
   int8_t _dir = 1;
 };
 
-class TmsSetState : public TmsState {  
+class TmsFollowState : public TmsState {  
   public:
-  TmsType type() { return Set; }
+  TmsType type() { return Follow; }
   void loop();
 
   private:
@@ -59,7 +59,7 @@ class TmsStateMachine {
   private:
   TmsState* _state = 0;
   TmsSweepState _sweepState;
-  TmsSetState _setState;
+  TmsFollowState _followState;
 };
 
 Servo servo[4];
@@ -84,8 +84,8 @@ void TmsStateMachine::loop() {
     if (type == Sweep) {
       _state = &_sweepState;
     }
-    else if (type == Set) {
-      _state = &_setState;
+    else if (type == Follow) {
+      _state = &_followState;
     }
     else {
       Serial.println("Error"); delay(100); exit(-1);
@@ -94,8 +94,8 @@ void TmsStateMachine::loop() {
   _state->loop();
 }
 
-void TmsSetState::loop() {
-  // Serial.println("TmsSetState::loop");
+void TmsFollowState::loop() {
+  // Serial.println("TmsFollowState::loop");
   int potPos = analogRead(AINPOT);
   uint8_t angle = map(potPos, 0, 1023, 0, 180);
   if (angle != _angle) {
