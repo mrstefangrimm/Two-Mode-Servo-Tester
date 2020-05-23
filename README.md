@@ -7,7 +7,15 @@ A first revision has been released in 2019.
 ## Construction
 A detailed description how to build a TMST can be found on *[instructables](https://www.instructables.com/id/Two-Mode-Servo-Tester/)*.
 
+## Manufacturing Tool Chain
+
+| Software       | License       |
+| -------------- | ------------- |
+| SketchUp       | SketchUp Shop |
+| Ultimaker Cura | GPL           |
+
 ## Examples
+
  - *[Video on youtube](https://youtu.be/my9G_F-GhBw)*
 
 ## License
